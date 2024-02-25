@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include ('./partials/head.ejs') %>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/public/css/app.css">
+
+</head>
+<body>
+    <%- include ('./partials/header.ejs') %>
+
+    <h1>This is Home Page</h1>  
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card card-1">
+                    <!-- <img src="../public/photos/melee-background.jpeg" class="card-img-top" alt="Image for Card 1"> -->
+                    <div class="card-body">
+                        <h5 class="card-title">Melee Items</h5>
+                        <p class="card-text">Description of Category 1</p>
+                        <a href="/home/melee" class="btn btn-primary">Go to Category 1</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card card-2">
+                    <div class="card-body">
+                        <h5 class="card-title">Pistols</h5>
+                        <p class="card-text">Description of Category 2</p>
+                        <a href="/home/pistol" class="btn btn-primary">Go to Category 2</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card card-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Machine Guns</h5>
+                        <p class="card-text">Description of Category 3</p>
+                        <a href="/home/machineGun" class="btn btn-primary">Go to Category 3</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card card-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Snipers</h5>
+                        <p class="card-text">Description of Category 4</p>
+                        <a href="/home/sniper" class="btn btn-primary">Go to Category 4</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card card-5">
+                    <div class="card-body">
+                        <h5 class="card-title">Armors</h5>
+                        <p class="card-text">Description of Category 5</p>
+                        <a href="/home/armor" class="btn btn-primary">Go to Category 5</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card card-6">
+                    <div class="card-body">
+                        <h5 class="card-title">Must have Items</h5>
+                        <p class="card-text">Description of Category 6</p>
+                        <a href="/home/mustHaveItem" class="btn btn-primary">Go to Category 6</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</body>
+</html>
+
+<style>
+    .card{
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .card-1 {
+        background-image: url(../public/photos/melee-background.jpeg);
+    }
+    body{
+        background: url(../public/photos/melee-background.jpeg);
+        background-color: black;
+    }
+</style>
