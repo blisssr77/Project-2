@@ -8,8 +8,9 @@ const port = 3000;
 
 // IMPORT ROUTES
 const userController = require('./controllers/userController')
-const sessionController = require('./controllers/session')
+const sessionController = require('./controllers/sessions')
 const itemRoutes = require('./routes/items')
+// const itemsList = require('./models/itemsList')
 
 
 // MIDDLEWARES
@@ -25,7 +26,7 @@ app.use(session({
 
 // Routes
 app.use('/users', userController)
-app.use('/session', sessionController)
+app.use('/sessions', sessionController)
 app.use('/', itemRoutes)
 
 

@@ -3,6 +3,7 @@ const router = require('express').Router()
 const User = require('../models/User')
 
 router.get('/login', (req,res) =>{
+   
     res.render('sessions/login.ejs', {
         currentUser: req.session.currentUser
     })

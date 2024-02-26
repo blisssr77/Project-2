@@ -1,24 +1,31 @@
 const Item = require('../models/Item')
+const { sniper, rifle } = require('../models/itemsList')
 
 // NEW
 // items/new
 const newForm = (req, res)=>{
     try{
-        res.render('new.ejs',{
-            tabTitle: 'New Item',
-            // currentUser: req.session.currentUser
-        })
+        res.render('new.ejs', {currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
 }
 
 // CREATE / POST
+// POST to myCart
+const addToCart = async (req, res) => {
+    try{
+        const item = req.body.item;
+        req.session.cart.push(item)
+    }catch(err){
+        console.log(err)
+    }
+}
 
 // HOME
 const home = async(req,res) =>{
     try{
-        res.render('home.ejs', {tabTitle: 'Home Page'})
+        res.render('home.ejs', {currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
@@ -26,61 +33,71 @@ const home = async(req,res) =>{
 
 const cart = async(req, res) =>{
     try{
-        res.render('myCart.ejs', {tabTitle: 'My Cart'})
+        res.render('myCart.ejs', {cart, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
 }
 
-// MELEE INDEX
-const melee = async(req,res)=>{
+// MELEE INDEX PAGE
+const meleePage = async(req,res)=>{
     try{
-        res.render('categories/melee.ejs', {tabTitle: 'Melee Items'})
+        const cart = req.session.cart || [];
+        res.render('categories/melee.ejs', {currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
 }
 
-// MELEE INDEX
+// PISTOL INDEX PAGE
 const pistol = async(req,res)=>{
     try{
-        res.render('categories/pistol.ejs', {tabTitle: 'Pistols'})
+        res.render('categories/pistol.ejs', {currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
 }
 
-// MELEE INDEX
+// MACHINE GUN INDEX PAGE
 const machineGun = async(req,res)=>{
     try{
-        res.render('categories/machineGun.ejs', {tabTitle: 'Machine Guns'})
+        res.render('categories/machineGun.ejs', {currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
 }
 
-// MELEE INDEX
-const sniper = async(req,res)=>{
+// SNIPER INDEX PAGE
+const sniperPage = async(req,res) => {
     try{
-        res.render('categories/sniper.ejs', {tabTitle: 'Snipers'})
+        res.render('categories/sniper.ejs', {sniper: sniper, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
 }
 
-// MELEE INDEX
+// RIFLE INDEX PAGE
+const riflePage = async(req,res) => {
+    try{
+        res.render('categories/rifle.ejs', {rifles: rifle, currentUser: req.session.currentUser})
+    }catch(err){
+        console.log(err)
+    }
+}
+
+// ARMOR INDEX PAGE
 const armor = async(req,res)=>{
     try{
-        res.render('categories/armor.ejs', {tabTitle: 'Armors'})
+        res.render('categories/armor.ejs', {currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
 }
 
-// MELEE INDEX
+// MUSTHAVEITEM INDEX PAGE
 const mustHaveItem = async(req,res)=>{
     try{
-        res.render('categories/mustHaveItem.ejs', {tabTitle: 'Must have Items'})
+        res.render('categories/mustHaveItem.ejs', {currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
@@ -96,8 +113,31 @@ const index = async(req, res)=>{
 }
 
 // SHOW
+const show = async (req, res) =>{
+    try{
+        const index = req.params.id
+        const item = await Item.findById(index)
+        console.log(item)
+        res.render('show.ejs',
+        {
+            item,
+            itemID: id,
+            tabTile: item.name,
+            currentUser: req.session.currentUser
+        })
+    }catch(err){
+        console.log(err)
+    }
+}
 
-// SEED
+// MELEE SEED
+const meleeSeed = async (req, res) => {
+    try{
+
+    }catch(err){
+        console.log(err)
+    }
+}
 
 // DELETE
 
@@ -109,10 +149,12 @@ module.exports = {
     home,
     new: newForm,
     cart,
-    melee,
+    riflePage,
     pistol,
     machineGun,
-    sniper,
+    sniperPage,
     armor,
     mustHaveItem,
+    show,
+    addToCart,
 }

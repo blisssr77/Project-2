@@ -5,21 +5,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snipers</title>
+    <title>Rifles</title>
     <link rel="stylesheet" href="/public/css/app.css">
 </head>
 <body>
     <%- include ('../partials/header.ejs') %>
 
-    <h1>You are in Snipers Index Page</h1>
+    <h1>You are in Rifles Index Page</h1>
     <div class="container">
         <div class="row">
-            <% if (sniper && Array.isArray(sniper)) { %>
-                <% for (let i = 0; i < sniper.length; i++) { %>
-                    <% const item = sniper[i]; %>
+            <% if (rifles && Array.isArray(rifles)) { %>
+                <% for (let i = 0; i < rifles.length; i++) { %>
+                    <% const item = rifles[i]; %>
                     <!--Each card -->
                     <div class="col-md-6 mb-4">
-                        <a href="/sniper/<%= item._id %>" style="text-decoration: none; color: inherit;">
+                        <a href="/rifle/<%= item._id %>" style="text-decoration: none; color: inherit;">
                         <div class="card" style="background-image: url('<%= item.image %>'); background-size:100%;">
                             <div class="card-body text-black">
                                 <h5 class="card-title"><%= item.name %></h5>
@@ -29,7 +29,7 @@
                                 <p class="card-text">Action: <%= item.action %></p>
                                 <p class="card-text">Origin: <%= item.origin %></p>
                                 <p class="card-text">Year: <%= item.year %></p>
-                                <a href="/sniper/<%= item._id %>" class="btn btn-primary">View Details</a>
+                                <a href="/rifle/<%= item._id %>" class="btn btn-primary">View Details</a>
                                 <br>
                                 <br>
 
