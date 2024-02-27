@@ -11,9 +11,9 @@ router.get('/new', (req, res)=>{
 
 router.post('/', async(req, res)=>{
     try{
-        req.body.password = bcrypt.hashSync(req.body.password,bcrypt.genSaltSync(10))
+        req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
         const newUser = await User.create(req.body)
-        res.redirect('/session/new')
+        res.redirect('/sessions/login')
     }catch(err){
         console.log(err)
     }

@@ -13,10 +13,10 @@ const newForm = (req, res)=>{
 
 // CREATE / POST
 // POST to myCart
-const addToCart = async (req, res) => {
+const addToWishList = async (req, res) => {
     try{
         const item = req.body.item;
-        req.session.cart.push(item)
+        res.render('wishList', {item: item})
     }catch(err){
         console.log(err)
     }
@@ -31,25 +31,16 @@ const home = async(req,res) =>{
     }
 }
 
-const cart = async(req, res) =>{
+const wishList = async(req, res) =>{
     try{
-        res.render('myCart.ejs', {cart, currentUser: req.session.currentUser})
+        res.render('wishList.ejs', {wishList, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
 }
 
-// MELEE INDEX PAGE
-const meleePage = async(req,res)=>{
-    try{
-        const cart = req.session.cart || [];
-        res.render('categories/melee.ejs', {currentUser: req.session.currentUser})
-    }catch(err){
-        console.log(err)
-    }
-}
 
-// RIFLE INDEX PAGE
+// SUMMER SPRING INDEX PAGE
 const summerSpringPage = async(req,res) => {
     try{
         const summerSpring = itemList.summerSpring;
@@ -59,7 +50,7 @@ const summerSpringPage = async(req,res) => {
     }
 }
 
-// PISTOL INDEX PAGE
+// FALL WINTER INDEX PAGE
 const fallWinterPage = async(req,res)=>{
     try{
         const fallWinter = itemList.fallWinter;
@@ -69,7 +60,7 @@ const fallWinterPage = async(req,res)=>{
     }
 }
 
-// MACHINE GUN INDEX PAGE
+// MEN COLOGNE INDEX PAGE
 const menColognePage = async(req,res)=>{
     try{
         const menCologne = itemList.menCologne;
@@ -84,6 +75,7 @@ const menColognePage = async(req,res)=>{
 // SHOW
 const show = async (req, res) =>{
     try{
+        console.log(req.params.id)
         const index = req.params.id
         const item = await Item.findById(index)
         console.log(item)
@@ -110,10 +102,10 @@ const show = async (req, res) =>{
 module.exports = {
     home,
     new: newForm,
-    cart,
+    wishList,
     summerSpringPage,
     fallWinterPage,
     menColognePage,
     show,
-    addToCart,
+    addToWishList,
 }
