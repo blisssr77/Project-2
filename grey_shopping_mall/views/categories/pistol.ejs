@@ -5,12 +5,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pistols</title>
+    <title>Rifles</title>
     <link rel="stylesheet" href="/public/css/app.css">
 </head>
 <body>
     <%- include ('../partials/header.ejs') %>
 
-    <h1>You are in Pistol Index Page</h1>
+    <h1>You are in Summer Spring Index</h1>
+    <div class="container">
+        <div class="row">
+            <% if (fallWinter && Array.isArray(fallWinter)) { %>
+                <% for (let i = 0; i < fallWinter.length; i++) { %>
+                    <% const item = fallWinter[i]; %>
+                    <!--Each card -->
+                    <div class="col-md-6 mb-4">
+                        <a href="/pistol/<%= item._id %>" style="text-decoration: none; color: inherit;">
+                        <div class="card" style="background-image: url('<%= item.image %>'); background-size:70%;">
+                            <div class="card-body text-black">
+                                <h5 class="card-title"><%= item.name %></h5>
+                                <br>
+                                <p class="card-text">Brand: <%= item.brand %></p>
+                                <p class="card-text">Description: <%= item.description %></p>
+                                <p class="card-text">Size: <%= item.size %></p>
+                                <p class="card-text">Price: $<%= item.price %></p>
+                                <br><br>
+                                <a href="/pistol/<%= item._id %>" class="btn btn-primary">View Details</a>
+                                <br>
+                                <br>
+
+                                <!-- Add to Cart button-->
+                                <form action="/cart" method="post">
+                                    <input type="hidden" name="itemId" value="<%= item._id %>">
+                                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                                </form>
+                            </div>
+                            <br><br>
+                        </div>
+                        </a>
+                    </div>
+                <% } %>
+            <% }%>
+                
+        </div>
+    </div>
 </body>
 </html>
+
+<style>
+    p {
+        color: rgb(255, 157, 0);
+    }
+</style>

@@ -1,5 +1,5 @@
 const Item = require('../models/Item')
-const { sniper, rifle } = require('../models/itemsList')
+const itemList = require('../models/itemsList')
 
 // NEW
 // items/new
@@ -49,10 +49,21 @@ const meleePage = async(req,res)=>{
     }
 }
 
+// RIFLE INDEX PAGE
+const riflePage = async(req,res) => {
+    try{
+        const summerSpring = itemList.summerSpring;
+        res.render('categories/rifle.ejs', {summerSpring, currentUser: req.session.currentUser})
+    }catch(err){
+        console.log(err)
+    }
+}
+
 // PISTOL INDEX PAGE
 const pistol = async(req,res)=>{
     try{
-        res.render('categories/pistol.ejs', {currentUser: req.session.currentUser})
+        const fallWinter = itemList.fallWinter;
+        res.render('categories/pistol.ejs', {fallWinter, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
@@ -61,56 +72,14 @@ const pistol = async(req,res)=>{
 // MACHINE GUN INDEX PAGE
 const machineGun = async(req,res)=>{
     try{
-        res.render('categories/machineGun.ejs', {currentUser: req.session.currentUser})
+        const menCologne = itemList.menCologne;
+        res.render('categories/machineGun.ejs', {menCologne: menCologne, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
 }
 
-// SNIPER INDEX PAGE
-const sniperPage = async(req,res) => {
-    try{
-        res.render('categories/sniper.ejs', {sniper: sniper, currentUser: req.session.currentUser})
-    }catch(err){
-        console.log(err)
-    }
-}
 
-// RIFLE INDEX PAGE
-const riflePage = async(req,res) => {
-    try{
-        res.render('categories/rifle.ejs', {rifles: rifle, currentUser: req.session.currentUser})
-    }catch(err){
-        console.log(err)
-    }
-}
-
-// ARMOR INDEX PAGE
-const armor = async(req,res)=>{
-    try{
-        res.render('categories/armor.ejs', {currentUser: req.session.currentUser})
-    }catch(err){
-        console.log(err)
-    }
-}
-
-// MUSTHAVEITEM INDEX PAGE
-const mustHaveItem = async(req,res)=>{
-    try{
-        res.render('categories/mustHaveItem.ejs', {currentUser: req.session.currentUser})
-    }catch(err){
-        console.log(err)
-    }
-}
-
-// INDEX / index route
-const index = async(req, res)=>{
-    try{
-
-    }catch(err){
-        console.log(err)
-    }
-}
 
 // SHOW
 const show = async (req, res) =>{
@@ -130,14 +99,7 @@ const show = async (req, res) =>{
     }
 }
 
-// MELEE SEED
-const meleeSeed = async (req, res) => {
-    try{
 
-    }catch(err){
-        console.log(err)
-    }
-}
 
 // DELETE
 
@@ -152,9 +114,6 @@ module.exports = {
     riflePage,
     pistol,
     machineGun,
-    sniperPage,
-    armor,
-    mustHaveItem,
     show,
     addToCart,
 }

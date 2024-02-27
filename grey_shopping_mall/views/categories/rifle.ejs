@@ -11,24 +11,24 @@
 <body>
     <%- include ('../partials/header.ejs') %>
 
-    <h1>You are in Rifles Index Page</h1>
+    <h1>You are in Summer Spring Index</h1>
     <div class="container">
         <div class="row">
-            <% if (rifles && Array.isArray(rifles)) { %>
-                <% for (let i = 0; i < rifles.length; i++) { %>
-                    <% const item = rifles[i]; %>
+            <% if (summerSpring && Array.isArray(summerSpring)) { %>
+                <% for (let i = 0; i < summerSpring.length; i++) { %>
+                    <% const item = summerSpring[i]; %>
                     <!--Each card -->
-                    <div class="col-md-6 mb-4">
+                    <div class="col-md-4 mb-8">
                         <a href="/rifle/<%= item._id %>" style="text-decoration: none; color: inherit;">
-                        <div class="card" style="background-image: url('<%= item.image %>'); background-size:100%;">
+                        <div class="card" style="background-image: url('<%= item.image %>'); background: size 100%;">
                             <div class="card-body text-black">
                                 <h5 class="card-title"><%= item.name %></h5>
-                                <p class="card-text">Manufacturer: <%= item.manufacturer %></p>
+                                <br>
+                                <p class="card-text">Brand: <%= item.brand %></p>
+                                <p class="card-text">Description: <%= item.description %></p>
+                                <p class="card-text">Size: <%= item.size %></p>
                                 <p class="card-text">Price: $<%= item.price %></p>
-                                <p class="card-text">Cartridge: <%= item.catridge %></p>
-                                <p class="card-text">Action: <%= item.action %></p>
-                                <p class="card-text">Origin: <%= item.origin %></p>
-                                <p class="card-text">Year: <%= item.year %></p>
+                                <br><br>
                                 <a href="/rifle/<%= item._id %>" class="btn btn-primary">View Details</a>
                                 <br>
                                 <br>
@@ -39,8 +39,10 @@
                                     <button type="submit" class="btn btn-success">Add to Cart</button>
                                 </form>
                             </div>
+                            <br><br>
                         </div>
                         </a>
+                        <br><br>
                     </div>
                 <% } %>
             <% }%>
