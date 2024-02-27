@@ -50,30 +50,30 @@ const meleePage = async(req,res)=>{
 }
 
 // RIFLE INDEX PAGE
-const riflePage = async(req,res) => {
+const summerSpringPage = async(req,res) => {
     try{
         const summerSpring = itemList.summerSpring;
-        res.render('categories/rifle.ejs', {summerSpring, currentUser: req.session.currentUser})
+        res.render('categories/summerSpring.ejs', {summerSpring, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
 }
 
 // PISTOL INDEX PAGE
-const pistol = async(req,res)=>{
+const fallWinterPage = async(req,res)=>{
     try{
         const fallWinter = itemList.fallWinter;
-        res.render('categories/pistol.ejs', {fallWinter, currentUser: req.session.currentUser})
+        res.render('categories/fallWinter.ejs', {fallWinter, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
 }
 
 // MACHINE GUN INDEX PAGE
-const machineGun = async(req,res)=>{
+const menColognePage = async(req,res)=>{
     try{
         const menCologne = itemList.menCologne;
-        res.render('categories/machineGun.ejs', {menCologne: menCologne, currentUser: req.session.currentUser})
+        res.render('categories/menCologne.ejs', {menCologne: menCologne, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
@@ -111,9 +111,9 @@ module.exports = {
     home,
     new: newForm,
     cart,
-    riflePage,
-    pistol,
-    machineGun,
+    summerSpringPage,
+    fallWinterPage,
+    menColognePage,
     show,
     addToCart,
 }
