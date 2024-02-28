@@ -13,5 +13,22 @@
     <%- include ('./partials/header.ejs') %>
 
     <h1>You are in Show PAge</h1>
+    <body>
+        <div class="container">
+            <h1>Item Details</h1>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><%= item.name %></h5>
+                    <p class="card-text">Brand: <%= item.brand %></p>
+                    <p class="card-text">Description: <%= item.description %></p>
+                    <p class="card-text">Size: <%= item.size %></p>
+                    <p class="card-text">Price: $<%= item.price %></p>
+                    <!-- Add more details here if needed -->
+                </div>
+            </div>
+            <!-- Add additional sections or details as required -->
+        </div>
+        <!-- Add your JavaScript scripts or links here -->
+    </body>
 </body>
 </html>

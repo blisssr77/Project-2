@@ -5,16 +5,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifles</title>
+    <title>Fall Winter Fragrance</title>
     <link rel="stylesheet" href="/public/css/app.css">
 </head>
 <body>
     <%- include ('../partials/header.ejs') %>
 
-    <h1>You are in Summer Spring Index</h1>
+    <h1>You are in Fall Winter Index</h1>
     <div class="container">
         <div class="row">
-            <% if (fallWinter && Array.isArray(fallWinter)) { %>
                 <% for (let i = 0; i < fallWinter.length; i++) { %>
                     <% const item = fallWinter[i]; %>
                     <!--Each card -->
@@ -44,7 +43,6 @@
                         </a>
                     </div>
                 <% } %>
-            <% }%>
                 
         </div>
     </div>

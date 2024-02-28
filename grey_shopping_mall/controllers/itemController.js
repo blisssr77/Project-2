@@ -1,5 +1,6 @@
 const Item = require('../models/Item')
 const itemList = require('../models/itemsList')
+const mongoose = require('mongoose')
 
 // NEW
 // items/new
@@ -12,6 +13,16 @@ const newForm = (req, res)=>{
 }
 
 // CREATE / POST
+const create = async(req, res)=>{
+    try{
+        const newItem = await Item.create(req.body)
+        console.log(newItem)
+        res.redirect('/')
+    }catch(err){
+        console.log(err)
+    }
+}
+
 // POST to myCart
 const addToWishList = async (req, res) => {
     try{
@@ -41,10 +52,10 @@ const wishList = async(req, res) =>{
 
 
 // SUMMER SPRING INDEX PAGE
-const summerSpringPage = async(req,res) => {
+const springSummerPage = async(req,res) => {
     try{
-        const summerSpring = itemList.summerSpring;
-        res.render('categories/summerSpring.ejs', {summerSpring, currentUser: req.session.currentUser})
+        const springSummer = itemList.springSummer;
+        res.render('categories/springSummer.ejs', {springSummer, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
@@ -70,6 +81,16 @@ const menColognePage = async(req,res)=>{
     }
 }
 
+// SPECIAL PAGE FOR USER
+const specialPage = async(req, res)=>{
+    try{
+        const specialScent = itemList.specialScent;
+        res.render("categories/special.ejs", {specialScent, currentUser: req.session.currentUser})
+    }catch(err){
+        console.log(err)
+    }
+}
+
 
 
 // SHOW
@@ -77,12 +98,12 @@ const show = async (req, res) =>{
     try{
         console.log(req.params.id)
         const index = req.params.id
-        const item = await Item.findById(index)
+        const itemId = mongoose.Types.ObjectId(index);
+        const item = await Item.findById(itemId);
         console.log(item)
         res.render('show.ejs',
         {
             item,
-            itemID: id,
             tabTile: item.name,
             currentUser: req.session.currentUser
         })
@@ -103,9 +124,11 @@ module.exports = {
     home,
     new: newForm,
     wishList,
-    summerSpringPage,
+    springSummerPage,
     fallWinterPage,
     menColognePage,
     show,
     addToWishList,
+    specialPage,
+    create,
 }

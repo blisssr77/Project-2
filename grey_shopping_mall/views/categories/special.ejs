@@ -5,20 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Men Cologne</title>
+    <title>Spring Summer Fragrance</title>
     <link rel="stylesheet" href="/public/css/app.css">
 </head>
 <body>
     <%- include ('../partials/header.ejs') %>
 
-    <h1>You are in Men Cologne Index</h1>
+    <h1>You are in Speical Index</h1>
     <div class="container">
         <div class="row">
-                <% for (let i = 0; i < menCologne.length; i++) { %>
-                    <% const item = menCologne[i]; %>
-                    <!--Each card -->
+                <% for (let i = 0; i < specialScent.length; i++) { %>
+                    <% const item = specialScent[i]; %>
+                    <!-- Showing Each card -->
                     <div class="col-md-4 mb-8">
-                        <a href="/rifle/<%= item._id %>" style="text-decoration: none; color: inherit;">
+                        <a href="/specialScent/<%= specialScent[i].id %>" style="text-decoration: none; color: inherit;">
                         <div class="card" style="background-image: url('<%= item.image %>'); background: size 100%;">
                             <div class="card-body text-black">
                                 <h5 class="card-title"><%= item.name %></h5>
@@ -28,14 +28,19 @@
                                 <p class="card-text">Size: <%= item.size %></p>
                                 <p class="card-text">Price: $<%= item.price %></p>
                                 <br><br>
-                                <a href="/rifle/<%= item._id %>" class="btn btn-primary">View Details</a>
+                                <a href="/specialScent/<%= specialScent[i].id %>" class="btn btn-primary">View Details</a>
                                 <br>
                                 <br>
 
-                                <!-- Add to Cart button-->
-                                <form action="/cart" method="post">
+                                <!-- Add to Wish List button-->
+                                <form action="/wishList" method="post">
                                     <input type="hidden" name="itemId" value="<%= item._id %>">
-                                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                                     <input type="hidden" name="itemName" value="<%= item.name %>">
+                                     <input type="hidden" name="itemBrand" value="<%= item.brand %>">
+                                     <input type="hidden" name="itemDescription" value="<%= item.description %>">
+                                     <input type="hidden" name="itemSize" value="<%= item.size %>">
+                                        <input type="hidden" name="itemPrice" value="<%= item.price %>">
+                                    <button type="submit" class="btn btn-success">Add to Wish List</button>
                                 </form>
                             </div>
                             <br><br>

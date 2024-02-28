@@ -31,7 +31,7 @@ app.use('/', itemRoutes)
 
 
 app.get('/', (req, res)=>{
-    res.redirect('/greyshoppingmall')
+    res.redirect('/BRiiZE')
 })
 
 

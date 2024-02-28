@@ -5,21 +5,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifles</title>
+    <title>Spring Summer Fragrance</title>
     <link rel="stylesheet" href="/public/css/app.css">
 </head>
 <body>
     <%- include ('../partials/header.ejs') %>
 
-    <h1>You are in Summer Spring Index</h1>
+    <h1>You are in Spring Summer Index</h1>
     <div class="container">
         <div class="row">
-            <% if (summerSpring && Array.isArray(summerSpring)) { %>
-                <% for (let i = 0; i < summerSpring.length; i++) { %>
-                    <% const item = summerSpring[i]; %>
+            
+                <% for (let i = 0; i < springSummer.length; i++) { %>
+                    <% const item = springSummer[i]; %>
                     <!--Each card -->
                     <div class="col-md-4 mb-8">
-                        <a href="/summerSpring/<%= summerSpring[i].id %>" style="text-decoration: none; color: inherit;">
+                        <a href="/springSummer/<%= item._id %>" style="text-decoration: none; color: inherit;">
                         <div class="card" style="background-image: url('<%= item.image %>'); background: size 100%;">
                             <div class="card-body text-black">
                                 <h5 class="card-title"><%= item.name %></h5>
@@ -29,7 +29,7 @@
                                 <p class="card-text">Size: <%= item.size %></p>
                                 <p class="card-text">Price: $<%= item.price %></p>
                                 <br><br>
-                                <a href="/summerSpring/<%= summerSpring[i].id %>" class="btn btn-primary">View Details</a>
+                                <a href="/springSummer/<%= springSummer[i].id %>" class="btn btn-primary">View Details</a>
                                 <br>
                                 <br>
 
@@ -50,7 +50,7 @@
                         <br><br>
                     </div>
                 <% } %>
-            <% }%>
+            
                 
         </div>
     </div>
