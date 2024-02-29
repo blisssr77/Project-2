@@ -1,4 +1,5 @@
 const Item = require('../models/Item')
+const Account = require('../models/User')
 const itemList = require('../models/itemsList')
 const mongoose = require('mongoose')
 
@@ -11,6 +12,8 @@ const newForm = (req, res)=>{
         console.log(err)
     }
 }
+
+
 
 // CREATE / POST
 const create = async(req, res)=>{
@@ -42,9 +45,19 @@ const home = async(req,res) =>{
     }
 }
 
+// WISH LIST PAGE
 const wishList = async(req, res) =>{
     try{
         res.render('wishList.ejs', {wishList, currentUser: req.session.currentUser})
+    }catch(err){
+        console.log(err)
+    }
+}
+
+// ACCOUNT PAGE
+const accountPage = async(req, res)=>{
+    try{
+        res.render('account.ejs', {accountPage, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
@@ -112,6 +125,17 @@ const show = async (req, res) =>{
     }
 }
 
+// Edit Account 
+const accountEdit = async(req, res)=>{
+    try{
+        const index = req.params.id
+        const account = await Account.findById(index)
+        res.render('edit.ejs', {accounts: account, tabTitle: 'Edit'})
+    }catch(err){
+        console.log(err)
+    }
+}
+
 
 
 // DELETE
@@ -131,4 +155,6 @@ module.exports = {
     addToWishList,
     specialPage,
     create,
+    accountEdit,
+    accountPage,
 }
