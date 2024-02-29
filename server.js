@@ -35,6 +35,6 @@ app.get('/', (req, res)=>{
 })
 
 
-app.listen(prcess.env.PORT, ()=>{
+app.listen(process.env.PORT, ()=>{
     console.log(`Robin, your port is at ${port}`)
 })
