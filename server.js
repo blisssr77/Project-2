@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const methodOverride = require('method-override');
 const session = require('express-session');
-const port = 3000;
+// const port = 3000;
 
 // IMPORT ROUTES
 const userController = require('./controllers/userController')
@@ -35,6 +35,6 @@ app.get('/', (req, res)=>{
 })
 
 
-app.listen(port, ()=>{
+app.listen(prcess.env.PORT, ()=>{
     console.log(`Robin, your port is at ${port}`)
 })
