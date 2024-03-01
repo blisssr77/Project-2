@@ -3,55 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grey Shopping Mall</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>BRiiZE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="navbar">
         <div class="container">
-            <a class="navbar-brand" href="/">BRiiZE</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/new">List your Special Scent</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/wishList">Wish List</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Welcome
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/account">Account</a>
-                            <a class="dropdown-item" href="">Log Out</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <a href="/" class="name">BRiiZE</a>
+            <a href="/new">List your Special Scent</a>
+            <a href="/wishList">Wish List</a>
+            <a href="/account">Account</a>
+            <a href="#">Log Out</a>
         </div>
-    </nav>
+    </div>
 </body>
 </html>
 
-
 <style>
-    .navbar-custom {
-        background-color: #333;
+    body { 
+        background-color: #f0f0f0; 
+        padding-top: 60px;
     }
-    .navbar-custom .navbar-brand {
-        color: #fff;
+    .navbar {
+        display: flex;
+        justify-content: space-between; /* Distributes space between and around items */
+        background-color: #333; /* Dark background for the navbar */
+        padding: 10px 20px; /* Adds some padding inside the navbar */
+        position: fixed; /* Fixes navbar to the top */
+        width: 100%; /* Ensures navbar extends full width */
+        top: 0; /* Positions navbar at the top of the viewport */
+        z-index: 1000; /* Ensures navbar is above other content */
     }
-    .navbar-custom .navbar-nav .nav-link {
-        color: #fff;
+
+    .container {
+        width: 90%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between; /* Evenly spaces links */
     }
-    .navbar-custom .navbar-nav .nav-link:hover {
-        color: #ffc107;
+
+    .navbar a {
+        color: #fff; /* Light text for contrast */
+        text-decoration: none; /* Removes underline from links */
+        font-weight: 500;
+    }
+
+    .navbar a:hover {
+        color: #007bff; /* Highlight color on hover */
+        text-decoration: underline; /* Underlines links on hover for emphasis */
+    }
+    .name{
+        font-size: 22px;
     }
 </style>

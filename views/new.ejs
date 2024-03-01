@@ -10,42 +10,39 @@
 
 </head>
 <body>
-    <%- include ('./partials/header.ejs') %>
-    <h1>You are in New Page</h1>
-    <div class="container">
-        <h1>Add your Special Scent</h1>
-        <div class="card">
-            <div class="card-body">
-                <form action="/BRiiZE/special" method="POST">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="brand" class="form-label">Brand:</label>
-                        <input type="text" class="form-control" id="brand" name="brand" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description:</label>
-                        <input type="text" class="form-control" id="description" name="description" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="size" class="form-label">Size:</label>
-                        <input type="text" class="form-control" id="size" name="size" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Price:</label>
-                        <input type="number" class="form-control" id="price" name="price" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Image URL:</label>
-                        <input type="url" class="form-control" id="image" name="image" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
+    <%- include('./partials/header.ejs') %>
+    <h1>Add your Special Scent</h1>
+    <div class="container" style="padding-top: 60px; max-width: 960px; margin: auto;">
+        
+        <div class="row">
+            <form action="/BRiiZE/special" method="POST" style="margin-top: 20px;">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Name" required style="width: 100%; margin-bottom: 10px;">
+
+                <label for="brand">Brand:</label>
+                <input type="text" id="brand" name="brand" placeholder="Brand" required style="width: 100%; margin-bottom: 10px;">
+
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" placeholder="Description" required style="width: 100%; margin-bottom: 10px;">
+
+                <label for="size">Size:</label>
+                <input type="text" id="size" name="size" placeholder="Size" required style="width: 100%; margin-bottom: 10px;">
+
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" placeholder="Price" required style="width: 100%; margin-bottom: 10px;">
+
+                <label for="image">Image URL:</label>
+                <input type="url" id="image" name="image" placeholder="Image URL" required style="width: 100%; margin-bottom: 20px;">
+
+                <button type="submit" style="background-color: #333; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px;">Submit</button>
+            </form>
         </div>
     </div>
-    
 </body>
 </html>
+
+<style>
+    h1{
+        text-align: center;
+    }
+</style>

@@ -6,8 +6,9 @@ const itemSchema = new mongoose.Schema({
     description: {type: String},
     size: {type: String, required: true},
     price: {type: Number, required: true},
+    link: {type: String},
     image: {type: String}
-})
+}, {timestamps: true})
 
 const Item = mongoose.model('Item', itemSchema)
 
