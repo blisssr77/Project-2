@@ -1,31 +1,45 @@
 // Import routes
-const router = require('express').Router()
-const isAuthenticated = require('../controllers/isAuthenticated')
-const itemCtrl = require('../controllers/itemController')
+const router = require('express').Router();
+const isAuthenticated = require('../controllers/isAuthenticated');
+const itemCtrl = require('../controllers/itemController');
 
-router.use(isAuthenticated)
-router.get('/BRiiZE', itemCtrl.home)
+// Apply isAuthenticated middleware to all routes
+router.use(isAuthenticated);
 
-router.get('/BRiiZE/springSummer', itemCtrl.springSummerPage)
-router.get('/BRiiZE/fallWinter', itemCtrl.fallWinterPage)
-router.get('/BRiiZE/menCologne', itemCtrl.menColognePage)
-router.get('/BRiiZE/special', itemCtrl.specialPage)
+// Static and creation routes
+router.get('/BRiiZE', itemCtrl.home);
+router.get('/new', itemCtrl.new);
+router.post('/BRiiZE/special', itemCtrl.create);
+router.post('/wishList', itemCtrl.addToWishList);
 
-router.get('/new', itemCtrl.new)
-router.post('/BRiiZE/special',itemCtrl.create)
-router.get('/wishList', itemCtrl.wishList)
-router.get('/account', itemCtrl.accountPage)
+// Index and seed routes
+router.get('/BRiiZE/springSummer', itemCtrl.springSummerPage);
+router.get('/BRiiZE/fallWinter', itemCtrl.fallWinterPage);
+router.get('/BRiiZE/menCologne', itemCtrl.menColognePage);
+router.get('/BRiiZE/special', itemCtrl.specialPage);
 
-router.get('/BRiiZE/springSummerSeed', itemCtrl.springSummerSeed)
-router.get('/BRiiZE/fallWinterSeed', itemCtrl.fallWinterSeed)
-
-
-router.get('/springSummer/:id', itemCtrl.show)
-router.delete('/springSummer/:id', itemCtrl.destroy)
-router.get('/account/:id/edit', itemCtrl.accountEdit)
+router.get('/BRiiZE/springSummerSeed', itemCtrl.springSummerSeed);
+router.get('/BRiiZE/fallWinterSeed', itemCtrl.fallWinterSeed);
+router.get('/BRiiZE/menCologneSeed', itemCtrl.menCologneSeed);
 
 
-router.post('/wishList', itemCtrl.addToWishList)
+// Show routes 
+router.get('/springSummer/:id', itemCtrl.SSShow);
+router.get('/fallWinter/:id', itemCtrl.FWShow);
+router.get('/menCologne/:id', itemCtrl.MShow);
+router.get('/special/:id', itemCtrl.SShow);
 
+// Account WishList Edit Delete routes
+router.get('/wishList', itemCtrl.wishList);
+router.get('/account', itemCtrl.accountPage);
+router.get('/account/:id/edit', itemCtrl.accountEdit);
+router.delete('/springSummer/:id', itemCtrl.SSDestroy);
+router.delete('/fallWinter/:id', itemCtrl.FWDestroy);
+router.delete('/menCologne/:id', itemCtrl.MDestroy);
+router.delete('/special/:id', itemCtrl.SDestroy);
+router.get('/special/:id/edit', itemCtrl.edit)
+router.put('/BRiiZE/special/:id', itemCtrl.update)
 
-module.exports = router
+router.post('/logout', itemCtrl.logout)
+
+module.exports = router;

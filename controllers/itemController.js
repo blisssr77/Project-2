@@ -1,4 +1,8 @@
-const Item = require('../models/Item')
+const SSItem = require('../models/SSItem')
+const FWItem = require('../models/FWItem')
+const MItem = require('../models/MItem')
+const SItem = require('../models/SItem')
+
 const Account = require('../models/User')
 const mongoose = require('mongoose')
 
@@ -15,7 +19,7 @@ const newForm = (req, res)=>{
 // CREATE / POST
 const create = async(req, res)=>{
     try{
-        const newItem = await Item.create(req.body)
+        const newItem = await SItem.create(req.body)
         console.log(newItem)
         res.redirect('/BRiiZE')
     }catch(err){
@@ -27,7 +31,10 @@ const create = async(req, res)=>{
 const addToWishList = async (req, res) => {
     try{
         const item = req.body.item;
-        res.render('wishList', {item: item})
+        res.render('wishList', {
+            item: item,
+            currentUser: req.session.currentUser,
+        })
     }catch(err){
         console.log(err)
     }
@@ -42,6 +49,7 @@ const home = async(req,res) =>{
     }
 }
 
+// WISH LIST PAGE
 const wishList = async(req, res) =>{
     try{
         res.render('wishList.ejs', {wishList, currentUser: req.session.currentUser})
@@ -50,6 +58,7 @@ const wishList = async(req, res) =>{
     }
 }
 
+// ACCOUNT DETAIL PAGE
 const accountPage = async(req, res)=>{
     try{
         res.render('account.ejs', {accountPage, currentUser: req.session.currentUser})
@@ -62,7 +71,7 @@ const accountPage = async(req, res)=>{
 // SUMMER SPRING INDEX PAGE
 const springSummerPage = async(req,res) => {
     try{
-        const springSummer = await Item.find()
+        const springSummer = await SSItem.find()
         res.render('categories/springSummer.ejs', {
             springSummer,
             tabTitle: 'SS Index',
@@ -75,7 +84,7 @@ const springSummerPage = async(req,res) => {
 // SPRING SUMMER SEED FUNCTION
 const springSummerSeed = async (req, res) => {
     try{
-        const springSummer = await Item.create([
+        const springSummer = await SSItem.create([
             {
                 name: 'Chanel Les Eaux de Chanel Paris-Riviera',
                 brand: 'Chanel',
@@ -212,7 +221,7 @@ const springSummerSeed = async (req, res) => {
 // FALL WINTER INDEX PAGE
 const fallWinterPage = async(req,res)=>{
     try{
-        const fallWinter = await Item.find()
+        const fallWinter = await FWItem.find()
         res.render('categories/fallWinter.ejs', {
             fallWinter,
             tabTitle: 'FW Index', 
@@ -225,7 +234,7 @@ const fallWinterPage = async(req,res)=>{
 // FALL WINTER SEED FUNCTION
 const fallWinterSeed = async (req, res) =>{
     try{
-        const fallWinter = await Item.create([
+        const fallWinter = await FWItem.create([
             {
                 name: 'Rose de Grasse Rouge',
                 brand: 'Aerin',
@@ -369,34 +378,196 @@ const fallWinterSeed = async (req, res) =>{
 }
 
 
-// // MEN COLOGNE INDEX PAGE
-// const menColognePage = async(req,res)=>{
-//     try{
-//         const menCologne = itemList.menCologne;
-//         res.render('categories/menCologne.ejs', {menCologne: menCologne, currentUser: req.session.currentUser})
-//     }catch(err){
-//         console.log(err)
-//     }
+// MEN COLOGNE INDEX PAGE
+const menColognePage = async(req,res)=>{
+    try{
+        const menCologne = await MItem.find()
+        res.render('categories/menCologne.ejs', {
+            menCologne: menCologne,
+            tabTitle: 'Men Colongne Index', 
+            currentUser: req.session.currentUser})
+    }catch(err){
+        console.log(err)
+    }
 }
 
-// // SPECIAL PAGE FOR USER
-// const specialPage = async(req, res)=>{
-//     try{
-//         const specialScent = itemList.specialScent;
-//         res.render("categories/special.ejs", {specialScent, currentUser: req.session.currentUser})
-//     }catch(err){
-//         console.log(err)
-//     }
-// }
+// MEN COLOGNE SEED FUNCTION
+const menCologneSeed = async (req, res)=>{
+    try{
+        const menCologne = await MItem.create([
+            {
+                name: 'Chanel Bleu',
+                brand: 'Chanel',
+                description: 'The most intense of the BLEU DE CHANEL fragrances. Powerful and refined, the Parfum for men reveals the essence of independence and determination. A timeless scent with a strong masculine signature.',
+                size: '3.4 FL. OZ.',
+                price: 193,
+                link: 'https://www.chanel.com/us/fragrance/p/107180/bleu-de-chanel-parfum-spray/?ranMID=39938&ranEAID=0c5b5rpoqTU&ranSiteID=0c5b5rpoqTU-eIIHid9Sx4BrOWhjhci55A&wt.mc_id=fb_eye_affiliate_en_us_dis&wt.mc_t=display&utm_source=linkshare&utm_campaign=fb_eye_affiliate&utm_medium=affiliate&utm_content=Vogue&siteID=0c5b5rpoqTU-eIIHid9Sx4BrOWhjhci55A',
+                image: 'https://assets.vogue.com/photos/6595953d85de882aa36c974c/master/w_1600,c_limit/HFA_0373.jpg'
+            },
+            {
+                name: 'Sauvage',
+                brand: 'Dior',
+                description: 'Dior Sauvage Eau de Parfum exudes sensual mystery. Calabrian bergamot adds spicy notes to nutmeg wrapped in smoky accents of vanilla. A perfume inspired by the magic hour of twilight in the desert, the moment when nature awakens',
+                size: '1 OZ.',
+                price: 85,
+                link: 'https://www.nordstrom.com/s/sauvage-eau-de-parfum/4897958?siteid=0c5b5rpoqTU-y68wAXjsgzifI7aR21vNWQ&utm_source=rakuten&utm_campaign=0c5b5rpoqTU&utm_content=1&utm_term=1115254&utm_channel=low_nd_affiliates_content&sp_source=rakuten&sp_campaign=0c5b5rpoqTU&utm_medium=affiliate_content',
+                image: 'https://assets.vogue.com/photos/6595953ba3df0183f3e86c57/master/w_1600,c_limit/HFA_0286.jpg'
+            },
+            {
+                name: 'Ralph Lauren - Polo Black',
+                brand: 'Polo',
+                description: "Sophisticated. Mysterious. Tempting. Cool Silver Armoise and musky Patchouli Noir blend with a burst of juicy iced mango accord for a bold men's fragrance that lingers.",
+                size: '6.7 FL. OZ.',
+                price: 135,
+                link: 'https://www.amazon.com/Black-Ralph-Lauren-Toilette-Spray/dp/B005XZ0OP8/?asc_source=verso&asc_campaign=6054bab9de380439cadee57e%7CgyCRzrreTc2iMHV1ep8ZaL&asc_refurl=https%3A%2F%2Fwww.vogue.com%2Farticle%2Fbest-colognes-for-men&ascsubtag=6054bab9de380439cadee57e&tag=vogue0d-20',
+                image: 'https://assets.vogue.com/photos/6054ce7c3d9f1094613214fa/3:4/w_640,c_limit/slide_15.jpg'
+            },
+            {
+                name: 'Guilty Elixir',
+                brand: 'GUCCI',
+                description: 'The irresistible Gucci cologne features a sensual vanilla and ambrofix base, a flamboyant orris butter heart, a smoky nutmeg top note.',
+                size: '2 OZ.',
+                price: 183,
+                link: 'https://www.nordstrom.com/s/guilty-elixir-de-parfum-for-men/7544465?siteid=0c5b5rpoqTU-BvVJBLaE8xGJnE3K2LFzAg&utm_source=rakuten&utm_campaign=0c5b5rpoqTU&utm_content=1&utm_term=1115254&utm_channel=low_nd_affiliates_content&sp_source=rakuten&sp_campaign=0c5b5rpoqTU&utm_medium=affiliate_content',
+                image: 'https://assets.vogue.com/photos/65d4ef7c4fc41b78bb3df50f/master/w_1600,c_limit/HFA_0313.jpg'
+            },
+            {
+                name: 'The Tobacco & Leather',
+                brand: 'Maison Margiela',
+                description: 'Imagine yourself in a dimly lit jazz club with the perfect cocktail, surrounded by cigar smoke and leather chairs. This scent is the next best thing: Warm and spicy, it has notes of pink pepper, rum, and tobacco. Perfect for the fall and winter months when you want to hibernate in full cozy mode.',
+                size: '1 OZ.',
+                price: 85,
+                link: 'https://www.nordstrom.com/s/maison-margiela-replica-jazz-club-eau-de-toilette-fragrance/4134973?siteid=0c5b5rpoqTU-tiXT1BFM86AtAjMcmwnaRA&utm_source=rakuten&utm_campaign=0c5b5rpoqTU&utm_content=1&utm_term=1115254&utm_channel=low_nd_affiliates_content&sp_source=rakuten&sp_campaign=0c5b5rpoqTU&utm_medium=affiliate_content',
+                image: 'https://assets.vogue.com/photos/6595953a9f95914ed2de4c5c/master/w_1600,c_limit/HFA_0274.jpg'
+            },
+            {
+                name: 'Calvin Klein Eternity',
+                brand: 'Calvin Klein',
+                description: 'Another enduring classic from 1988, Eternity is a romantic floral fragrance that was inspired by lasting love. Clearly, the love affair with this scent carries on too: It’s decidedly unisex, and works for both him and her. Notes of freesia, mandarin, sage, white lily, patchouli, and sandalwood make for a timeless blend.',
+                size: '3.3 FL. OZ.',
+                price: 104,
+                link: 'https://www.amazon.com/Calvin-Klein-ETERNITY-Men-Toilette/dp/B00021AKJI?asc_source=verso&asc_campaign=6054bab9de380439cadee57e%7CgGD8axNQFWFwDNPGmDEvgw&asc_refurl=https%3A%2F%2Fwww.vogue.com%2Farticle%2Fbest-colognes-for-men&ascsubtag=6054bab9de380439cadee57e&tag=vogue0d-20',
+                image: 'https://assets.vogue.com/photos/6054ce8fde380439cadee5c2/3:4/w_640,c_limit/slide_7.jpg'
+            },
+            {
+                name: 'Another 13',
+                brand: 'Le Labo',
+                description: 'You may know Le Labo for its signature Santal 33 scent, but Another 13 is one of its more slept-on fragrances that deserves just as much hype. A collaboration with Another magazine, the scent is equal parts musky and fresh, composed of ambroxan, jasmine petals, moss, and woody, amber-y notes.',
+                size: '1.7 OZ.',
+                price: 230,
+                link: 'https://www.saksfifthavenue.com/product/le-labo-another-13-eau-de-parfum-0400010736952.html?ranMID=13816&ranEAID=0c5b5rpoqTU&ranSiteID=0c5b5rpoqTU-r2fYDg9WGgn6nFANog1PpQ&site_refer=AFF001&mid=13816&siteID=0c5b5rpoqTU-r2fYDg9WGgn6nFANog1PpQ&LSoid=1278460&LSlinkid=10&LScreativeid=1',
+                image: 'https://assets.vogue.com/photos/6054cd6451b6a301cf32a966/3:4/w_640,c_limit/slide_12.jpg'
+            },
+            {
+                name: 'Bibliothèque',
+                brand: 'BYREDO',
+                description: 'Sheltered from the passage of time, libraries have the power to teleport us to a world in suspension. The fragrance channels the velvety quality of paper embodied in a touch of peach, plum, vanilla and the omnipresent patchouli running like a backbone through the composition.',
+                size: '1.7 OZ.',
+                price: 205,
+                link: 'https://www.nordstrom.com/s/bibliotheque-eau-de-parfum/4893896?siteid=0c5b5rpoqTU-QlsXER6MCzBGud1EQ5tzgw&utm_source=rakuten&utm_campaign=0c5b5rpoqTU&utm_content=1&utm_term=1115254&utm_channel=low_nd_affiliates_content&sp_source=rakuten&sp_campaign=0c5b5rpoqTU&utm_medium=affiliate_content',
+                image: 'https://assets.vogue.com/photos/6054ce5840c3812adafdb036/3:4/w_640,c_limit/slide_4.jpg'
+            },
+            {
+                name: 'Hugo Boss Boss',
+                brand: 'BOSS',
+                description: 'Launched in 1998, this enduring cologne is a cult classic thanks to its timeless, masculine scent. Fruity and citrus top notes of apple, lemon, and plum are balanced against a hefty floral and spicy base, including geranium, sandalwood, and vetiver.',
+                size: '3.3 FL. OZ.',
+                price: 104,
+                link: 'https://www.amazon.com/Hugo-Boss-BOTTLED-Eau-Toilette/dp/B000RPLZAM/?asc_source=verso&asc_campaign=6054bab9de380439cadee57e%7Ct1tQDb7zfRfTYTf5hFffBa&asc_refurl=https%3A%2F%2Fwww.vogue.com%2Farticle%2Fbest-colognes-for-men&ascsubtag=6054bab9de380439cadee57e&tag=vogue0d-20',
+                image: 'https://assets.vogue.com/photos/6054cf0748ee0886a203daf9/3:4/w_640,c_limit/slide_3.jpg'
+            },
+            {
+                name: 'MYSLF',
+                brand: 'Yves Saint Laurent',
+                description: 'On top, a fresh and vibrant accord with sparkling bergamot, followed by a rich and intense orange blossom absolute heart. At the base, the fragrance is balanced by warm and sensual woods, including patchouli and musky Ambrofix™. A statement of modern masculinity to celebrate your true self. Unapologetically. Proudly. A long-lasting fragrance that seamlessly fuses with your skin, revealing a distinct signature for each individual. My scent, MYSLF.',
+                size: '1.35 OZ.',
+                price: 89,
+                link: 'https://www.nordstrom.com/s/myslf-refillable-eau-de-parfum/7506287?siteid=0c5b5rpoqTU-s78JQq6CYwwnYsdUK7OIOw&utm_source=rakuten&utm_campaign=0c5b5rpoqTU&utm_content=1&utm_term=1115254&utm_channel=low_nd_affiliates_content&sp_source=rakuten&sp_campaign=0c5b5rpoqTU&utm_medium=affiliate_content',
+                image: 'https://assets.vogue.com/photos/65d4e94d48ca2d4ad07b9b72/3:4/w_640,c_limit/2.jpg'
+            },
+            {
+                name: 'Tom Ford Oud Wood',
+                brand: 'Tom Ford',
+                description: 'Oud wood is one of the most precious and expensive ingredients for any perfumer, and this cologne by Tom Ford nails the woody scent. Combined with cardamom, sandalwood, and vetiver—with hints of tonka bean and amber—a few spritzes of this signature scent is like warming up to a nice cozy fire.',
+                size: '1 OZ.',
+                price: 195,
+                link: 'https://www.nordstrom.com/s/tom-ford-private-blend-oud-wood-eau-de-parfum/3623561?siteid=0c5b5rpoqTU-1ZIVlzIY0pMQHybjoIhfLg&origin=category-personalizedsort&breadcrumb=Home%2FBrands%2FTom%20Ford&color=none&utm_source=rakuten&utm_campaign=0c5b5rpoqTU&utm_content=1&utm_term=1115254&utm_channel=low_nd_affiliates_content&sp_source=rakuten&sp_campaign=0c5b5rpoqTU&utm_medium=affiliate_content',
+                image: 'https://assets.vogue.com/photos/6595953a815a50ae66a9f868/master/w_1600,c_limit/HFA_0298.jpg'
+            },
+            {
+                name: 'Geranium Pour Monsieur',
+                brand: 'Frederic Malle',
+                description: 'A tenacious freshness inhabits Géranium pour Monsieur. Its composition offers a sophisticated alternative to the classic fern (fougère) type fragrances. A heart of geranium from China, mint and aniseed notes, spices such as clove and cinnamon, sandalwood and a large dose of white musks are the principle actors of this novel genre. Rare warm exotic notes such as incense resinoid and styrax benzoin add a particular sophistication to this impression of clarity and freshness.',
+                size: '3.38 FL. OZ.',
+                price: 335,
+                link: 'https://www.saksfifthavenue.com/product/Edition-De-Parfums-Frederic-Malle-Geranium-Pour-Monsieur-Parfum-Spray-0400093279413.html?ranMID=13816&ranEAID=0c5b5rpoqTU&ranSiteID=0c5b5rpoqTU-1KIDJhkD9Cw3Rr7RM9NuOA&site_refer=AFF001&mid=13816&siteID=0c5b5rpoqTU-1KIDJhkD9Cw3Rr7RM9NuOA&LSoid=1278460&LSlinkid=10&LScreativeid=1',
+                image: 'https://assets.vogue.com/photos/6595953bbf210899c85cd76d/master/w_1600,c_limit/HFA_0314.jpg'
+            },
+            {
+                name: 'Aventus',
+                brand: 'Creed',
+                description: 'The bestselling men’s fragrance in the history of the House of Creed, Aventus celebrates strength, power, success, and heritage, a sophisticated scent, perfect for the modern discerning gentleman. Sensual, audacious, and contemporary, this rich and iconic Eau de Parfum combines tantalizing fruity head notes of apple, blackcurrant, pink pepper, and bergamot with a complementary fresh and fruity heart of jasmine, pineapple and patchouli. Rounding off this bold and elegant men’s fragrance spray is a rich, woody base of oakmoss, cedarwood, birch, and Creed’s signature ingredient, Ambroxan, for the ultimate olfactive experience. Made in France.',
+                size: '1.7 OZ.',
+                price: 365,
+                link: 'https://www.saksfifthavenue.com/product/creed-aventus-eau-de-parfum-0400094449501.html?ranMID=13816&ranEAID=0c5b5rpoqTU&ranSiteID=0c5b5rpoqTU-DcenUD.PjGynN_ePe5lvZA&site_refer=AFF001&mid=13816&siteID=0c5b5rpoqTU-DcenUD.PjGynN_ePe5lvZA&LSoid=1278460&LSlinkid=10&LScreativeid=1',
+                image: 'https://assets.vogue.com/photos/6595953ba3df0183f3e86c56/master/w_1600,c_limit/HFA_0336.jpg'
+            },
+            {
+                name: "Terre d'Hermès",
+                brand: 'Hermès',
+                description: "The Eau de Parfum combines the intensity of citron, the sharp freshness of juniper berry and the power of Timut pepper. The Terre d'Hermès collection tells the story of man's relationship with the Earth, his humble and harmonious dialogue with nature and the elements.",
+                size: '1.7 OZ.',
+                price: 125,
+                link: 'https://www.nordstrom.com/s/terre-dhermes-eau-givree-eau-de-parfum/6878724?siteid=0c5b5rpoqTU-O4lKhARtfaHdL6qaihadaQ&utm_source=rakuten&utm_campaign=0c5b5rpoqTU&utm_content=1&utm_term=1115254&utm_channel=low_nd_affiliates_content&sp_source=rakuten&sp_campaign=0c5b5rpoqTU&utm_medium=affiliate_content',
+                image: 'https://assets.vogue.com/photos/65d4ef7ccaca24c8a4aa2316/master/w_1600,c_limit/HFA_0257.jpg'
+            },
+            {
+                name: 'Spicebomb',
+                brand: 'Viktor&Rolf',
+                description: "This distinctly masculine scent contrasts the spiciness of chili and saffron with woody notes of leather and tobacco. It's further distinguished by the brute strength of vetiver and the zesty notes of bergamot and grapefruit, which transform this men's cologne into the signature of a powerful, intense, daring man.",
+                size: '3 OZ.',
+                price: 130,
+                link: 'https://www.nordstrom.com/s/viktor-and-rolf-viktorrolf-spicebomb-eau-de-toilette-fragrance/3280721?siteid=0c5b5rpoqTU-mrA71AgwW1O9pxvJ7t4EMw&utm_source=rakuten&utm_campaign=0c5b5rpoqTU&utm_content=1&utm_term=1115254&utm_channel=low_nd_affiliates_content&sp_source=rakuten&sp_campaign=0c5b5rpoqTU&utm_medium=affiliate_content',
+                image: 'https://assets.vogue.com/photos/6524100286b5b9b7a5180d02/3:4/w_640,c_limit/slide_3%20(21).jpg'
+            },
+            {
+                name: 'Osmanthe Kodoshan',
+                brand: 'Maison Crivelli',
+                description: 'The discovery of the osmanthus flowers on a misty, tropical mountain is the inspiration behind Maison Crivelli’s Osmanthe Kodoshan—a woody floral scent crafted in partnership with perfumer Stéphanie Bakouche. Here, leather and tobacco leaf juxtapose spicy Sichuan pepper, and rich peachy and apricot fruits for a scent that transports you to the moist outdoors. ',
+                size: '3.4 OZ.',
+                price: 260,
+                link: 'https://www.saksfifthavenue.com/product/maison-crivelli-osmanthe-kodoshan-eau-de-parfum-0400017968987.html?ranMID=13816&ranEAID=0c5b5rpoqTU&ranSiteID=0c5b5rpoqTU-HViBbRbBOd3TQ978foDLtA&site_refer=AFF001&mid=13816&siteID=0c5b5rpoqTU-HViBbRbBOd3TQ978foDLtA&LSoid=1278460&LSlinkid=10&LScreativeid=1',
+                image: 'https://assets.vogue.com/photos/6373e3a7bef03ca674096195/3:4/w_640,c_limit/slide_%20(71).jpg'
+            },
+        ]
+
+        )
+    }catch(err){
+        console.log(err)
+    }
+}
+
+// SPECIAL SCENT INDEX PAGE 
+const specialPage = async(req, res)=>{
+    try{
+        const specialScent = await SItem.find();
+        res.render("categories/special.ejs", {
+            specialScent, 
+            tabTitle: 'Special Scent Index',
+            currentUser: req.session.currentUser})
+    }catch(err){
+        console.log(err)
+    }
+}
 
 
-// SHOW
-const show = async (req, res) =>{
+// SPRING SUMMER SHOW
+const SSShow = async (req, res) =>{
     try{
         console.log(req.params.id)
         const index = req.params.id
         // const itemId = mongoose.Types.ObjectId(index);
-        const item = await Item.findById(index);
+        const item = await SSItem.findById(index);
         console.log(item)
         res.render('show.ejs',
         {
@@ -409,6 +580,64 @@ const show = async (req, res) =>{
     }
 }
 
+// SPECIAL SCENT SHOW
+const SShow = async (req, res) =>{
+    try{
+        console.log(req.params.id)
+        const index = req.params.id
+        // const itemId = mongoose.Types.ObjectId(index);
+        const item = await SItem.findById(index);
+        console.log(item)
+        res.render('show.ejs',
+        {
+            item,
+            tabTile: item.name,
+            currentUser: req.session.currentUser
+        })
+    }catch(err){
+        console.log(err)
+    }
+}
+
+// FALL WINTER SHOW
+const FWShow = async (req, res) =>{
+    try{
+        console.log(req.params.id)
+        const index = req.params.id
+        // const itemId = mongoose.Types.ObjectId(index);
+        const item = await FWItem.findById(index);
+        console.log(item)
+        res.render('show.ejs',
+        {
+            item,
+            tabTile: item.name,
+            currentUser: req.session.currentUser
+        })
+    }catch(err){
+        console.log(err)
+    }
+}
+
+// MEN COLOGNE SHOW
+const MShow = async (req, res) =>{
+    try{
+        console.log(req.params.id)
+        const index = req.params.id
+        // const itemId = mongoose.Types.ObjectId(index);
+        const item = await MItem.findById(index);
+        console.log(item)
+        res.render('show.ejs',
+        {
+            item,
+            tabTile: item.name,
+            currentUser: req.session.currentUser
+        })
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
 // Edit Account
 const accountEdit = async(req, res)=>{
     try{
@@ -420,22 +649,107 @@ const accountEdit = async(req, res)=>{
     }
 }
 
+// // OBJECT DELETE FUNCTION
+// async function deleteItem(req,res){
+//     try{
+//         console.log('you are inside the delete route');
+//         const result = await deleteItem(req.params.id);
+        
+//     }catch(err){
+//         console.log(err)
+//     }
+// }
 
-
-// DELETE
-const destroy = async (req, res) => {
+// SPRING SUMMER OBJECT DELETE FUNCTION
+const SSDestroy = async (req, res) => {
     try{
-        console.log("insed the delete route")
-        await Item.findByIdAndDelete(req.params.id)
+        console.log("inside the delete route")
+        await SSItem.findByIdAndDelete(req.params.id)
         res.redirect('/BRiiZE/springSummer')
     }catch(err){
         console.log(err)
     }
 }
+// FALL WINTER OBJECT DELETE FUNCTION
+const FWDestroy = async (req, res) => {
+    try{
+        console.log("inside the delete route")
+        await FWItem.findByIdAndDelete(req.params.id)
+        res.redirect('/BRiiZE/fallWinter')
+    }catch(err){
+        console.log(err)
+    }
+}
+// MEN COLOGNE OBJECT DELETE FUNCTION
+const MDestroy = async (req, res) => {
+    try{
+        console.log("inside the delete route")
+        await MItem.findByIdAndDelete(req.params.id)
+        res.redirect('/BRiiZE/menCologne')
+    }catch(err){
+        console.log(err)
+    }
+}
+// SPECIAL SCENT OBJECT DELETE FUNCTION
+const SDestroy = async (req, res) => {
+    try{
+        console.log("inside the delete route")
+        await SItem.findByIdAndDelete(req.params.id)
+        res.redirect('/BRiiZE/special')
+    }catch(err){
+        console.log(err)
+    }
+}
 
-// EDIT - "/id/edit"
+// ACCOUNT LOG OUT FUNCTION  // I've got an idea of this code in StackOverFlow
+const logout = async (req, res) => {
+    try {
+        // Wrap req.session.destroy in a promise
+        await new Promise((resolve, reject) => {
+            req.session.destroy((err) => {
+                if (err) {
+                    reject(err); // Reject the promise if there's an error
+                } else {
+                    resolve(); // Resolve the promise otherwise
+                }
+            });
+        });
+        
+        res.clearCookie('connect.sid'); // Clear the session cookie
+        res.redirect('/'); // Redirect user to home page or login page
+    } catch (err) {
+        console.log(err); // Log the error
+        res.redirect('/'); // Redirect to a safe page in case of error
+    }
+};
+
+// SPECIAL SCENT EDIT - "/id/edit"
+const editForm = async(req,res)=>{
+    try{
+        const item = await SItem.findById(req.params.id)
+        res.render('SItemEdit.ejs', {
+            item,
+            tabTitle:'Special Scent',
+            currentUser: req.session.currentUser
+        })
+    }catch(err){
+        console.log(err)
+    }
+}
 
 // PUT - "items/:id"
+const update = async(req, res)=>{
+    try{
+        console.log(req.body)
+        const index = req.params.id
+        const item = await SItem.findByIdAndUpdate(index, req.body, {new: true})
+        console.log(`Received ${req.method} request for ${req.path}`);
+        res.redirect('/BRiiZE/special')
+    }catch(err){
+        console.log(err)
+        res.status(500).send("Error updating item: " + err.message)
+    }
+}
 
 module.exports = {
     home,
@@ -444,7 +758,10 @@ module.exports = {
     springSummerPage,
     fallWinterPage,
     menColognePage,
-    show,
+    SSShow,
+    FWShow,
+    SShow,
+    MShow,
     addToWishList,
     specialPage,
     create,
@@ -452,5 +769,12 @@ module.exports = {
     accountEdit,
     springSummerSeed,
     fallWinterSeed,
-    destroy,
+    menCologneSeed,
+    SSDestroy,
+    FWDestroy,
+    MDestroy,
+    SDestroy,
+    logout,
+    edit: editForm,
+    update,
 }

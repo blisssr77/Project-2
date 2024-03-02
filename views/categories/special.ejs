@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include ('../partials/head.ejs') %> <!-- Assuming this partial includes the <meta> tags -->
-    <title>Spring Summer Fragrance</title>
+    <%- include ('../partials/head.ejs') %> 
+    <title>Spcial Scent</title>
 
 </head>
 <body>
@@ -10,12 +10,12 @@
 
     <div class="container" style="max-width: 960px; margin: auto;">
         <div class="row" style="margin: -10px;">
-            <% for (let i = 0; i < springSummer.length; i++) { %>
-                <% const item = springSummer[i]; %>
-                <!-- Adjusted to "four columns" for an even three-column layout -->
-                <div class="four columns" style="padding: 10px;">
-                    <a href="/springSummer/<%= item.id %>" style="text-decoration: none; color: inherit;">
-                        <div class="card" style="background-image: url('<%= item.image %>'); background-size: cover; padding: 20px; color: black; height: 100%;">
+            <% for (let i = 0; i < specialScent.length; i++) { %>
+                <% const item = specialScent[i]; %>
+
+                <div class="six columns" style="padding: 10px;">
+                    <a href="/special/<%= item.id %>" style="text-decoration: none; color: inherit;">
+                        <div class="card" style="background-image: url('<%= item.image %>');background-position: center; background-size: contain; background-repeat: no-repeat; background-position: center; padding: 20px; color: black; height: 100%;">
                             <h5><%= item.name %></h5>
                             <p>Brand: <%= item.brand %></p>
                             <p>Description: <%= item.description %></p>
@@ -29,7 +29,8 @@
                                 <button type="submit" class="button">Add to Cart</button>
                             </form>
                             <br>
-                            <form method="POST" action="/springSummer/<%= item.id %>?_method=DELETE">
+                            <a href="/special/<%= item.id %>/edit" type="button" class="button">Item Edit</a>
+                            <form method="POST" action="/special/<%= item.id %>?_method=DELETE">
                                 <input class="button" type="submit" value="DELETE"/>
                             </form>
                         </div>
@@ -40,34 +41,8 @@
     </div>
 
     <style>
-        .card {
-            background: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: 0.3s;
-            border-radius: 5px; /* Optional */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card:hover {
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-
-        .button {
-            display: inline-block;
-            padding: 8px;
-            background: #333;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px; /* Optional */
-            cursor: pointer;
-            text-align: center;
-            width: 100%; /* Makes the button expand to the full width */
-        }
-
         p, h5 {
-            color: #333; /* Adjusting the text color for better readability */
+            color: #333; 
         }
     </style>
 </body>

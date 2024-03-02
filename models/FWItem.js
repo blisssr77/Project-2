@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const itemSchema = new mongoose.Schema({
+const FWSchema = new mongoose.Schema({
     name: {type: String, required: true},
     brand: {type: String, required: true},
     description: {type: String},
@@ -10,6 +10,6 @@ const itemSchema = new mongoose.Schema({
     image: {type: String}
 }, {timestamps: true})
 
-const Item = mongoose.model('Item', itemSchema)
+const FWItem = mongoose.model('Fall Winter Item', FWSchema)
 
-module.exports = Item
+module.exports = FWItem;

@@ -10,7 +10,6 @@ const session = require('express-session');
 const userController = require('./controllers/userController')
 const sessionController = require('./controllers/sessions')
 const itemRoutes = require('./routes/items')
-// const itemsList = require('./models/itemsList')
 
 
 // MIDDLEWARES

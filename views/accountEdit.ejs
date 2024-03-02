@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EYV4iWzSubZT+Y2V6Q8bI5Y9JYq5m4MjQpGA1oH8QVUS9dh/Yp/lj2kiV6TcJb9E7S/9a/z4i5EWKoIsZo5rDQ==" crossorigin="anonymous" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="twelve columns" style="margin-top: 20px;">
+                <h3>Edit Account Information</h3>
+                <form action="/account/update" method="POST">
+                    <label for="username">Username:</label>
+                    <input class="u-full-width" type="text" id="username" name="username" value="<%= currentUser.username %>" required>
+
+                    <label for="email">Email:</label>
+                    <input class="u-full-width" type="email" id="email" name="email" value="<%= currentUser.email %>" required>
+
+                    <!-- Password field can be included if you want to allow users to change their password -->
+                    <label for="password">New Password (optional):</label>
+                    <input class="u-full-width" type="password" id="password" name="password">
+
+                    <input type="hidden" name="id" value="<%= currentUser._id %>"> <!-- Assuming MongoDB _id is used -->
+                    <input class="button-primary" type="submit" value="Update Account">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
