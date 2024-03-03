@@ -23,3 +23,6 @@
     text-align: center;
     width: 100%; 
 }
+.fixed-card-height {
+    height: 500px; /* Adjust based on your content */
+}

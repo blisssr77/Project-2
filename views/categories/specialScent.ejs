@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <%- include ('../partials/head.ejs') %> 
-    <title>Men Cologne</title>
+    <title>Special Scent</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
 
 
@@ -12,12 +12,12 @@
 
     <div class="container" style="max-width: 960px; margin: auto;">
         <div class="columns is-multiline">
-            <% for (let i = 0; i < menCologne.length; i++) { %>
-                <% const item = menCologne[i]; %>
+            <% for (let i = 0; i < specialScent.length; i++) { %>
+                <% const item = specialScent[i]; %>
     
                 <div class="column">
                     <div class="card" style="background-image: url('<%= item.image %>');background-position: center; background-size: contain; background-repeat: no-repeat; background-position: center; padding: 20px; color: black; height: 100%;">
-                        <a href="/menCologne/<%= item.id %>" style="text-decoration: none; color: inherit;">
+                        <a href="/special/<%= item.id %>" style="text-decoration: none; color: inherit;">
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-content">
@@ -35,14 +35,19 @@
                                     <input type="hidden" name="itemId" value="<%= item._id %>">
                                     <button type="submit" class="button is-primary">Add to Wish List</button>
                                 </form>
-                                <form method="POST" action="/menCologne/<%= item.id %>?_method=DELETE">
+                                <form method="POST" action="/special/<%= item.id %>?_method=DELETE">
                                     <button class="button is-danger" type="submit">Delete</button>
                                 </form>
+                                <a href="/special/<%= item.id %>/edit">
+                                    <button type="submit" class="button" style="color: red;">Edit Item</button>
+                                </a>
                             </div>
                         </div>
                         </a>
+                        
                     </div>
                 </div>
+                
             <% } %>
         </div>
     </div>
@@ -54,5 +59,3 @@
     </style>
 </body>
 </html>
-
-<%- include('../partials/footer.ejs') %>

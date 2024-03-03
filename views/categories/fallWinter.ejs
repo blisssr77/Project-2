@@ -3,46 +3,56 @@
 <head>
     <%- include ('../partials/head.ejs') %> 
     <title>Fall Winter Fragrance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+
 
 </head>
 <body>
     <%- include ('../partials/header.ejs') %>
 
     <div class="container" style="max-width: 960px; margin: auto;">
-        <div class="row" style="margin: -10px;">
+        <div class="columns is-multiline">
             <% for (let i = 0; i < fallWinter.length; i++) { %>
-                <% const FWItem = fallWinter[i]; %>
-
-                <div class="four columns" style="padding: 10px;">
-                    <a href="/fallWinter/<%= FWItem.id %>" style="text-decoration: none; color: inherit;">
-                        <div class="card" style="background-image: url('<%= FWItem.image %>'); background-position: center; background-size: contain; background-repeat: no-repeat; background-position: center; padding: 20px; color: black; height: 100%;">
-                            <h5><%= FWItem.name %></h5>
-                            <p>Brand: <%= FWItem.brand %></p>
-                            <p>Description: <%= FWItem.description %></p>
-                            <p>Size: <%= FWItem.size %></p>
-                            <p>Price: $<%= FWItem.price %></p>
-                            <a href="<%= FWItem.link %>" class="button">Visit Website</a>
-                            <br>
-                            <!-- Add to Cart button-->
-                            <form action="/cart" method="post">
-                                <input type="hidden" name="FWItem" value="<%= FWItem._id %>">
-                                <button type="submit" class="button">Add to Cart</button>
-                            </form>
-                            <br>
-                            <form method="POST" action="/fallWinter/<%= FWItem.id %>?_method=DELETE">
-                                <input class="button" type="submit" value="DELETE"/>
-                            </form>
+                <% const item = fallWinter[i]; %>
+    
+                <div class="column">
+                    <div class="card" style="background-image: url('<%= item.image %>');background-position: center; background-size: contain; background-repeat: no-repeat; background-position: center; padding: 20px; color: black; height: 100%;">
+                        <a href="/fallWinter/<%= item.id %>" style="text-decoration: none; color: inherit;">
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4"><%= item.name %></p>
+                                    <p class="subtitle is-5">Brand: <%= item.brand %></p>
+                                </div>
+                            </div>
+    
+                            <div class="content">
+                                <p>Description: <%= item.description %></p>
+                                <p>Size: <%= item.size %></p>
+                                <p>Price: $<%= item.price %></p>
+                                <a href="<%= item.link %>" class="button is-link">Visit Website</a>
+                                <form action="/wishList" method="post">
+                                    <input type="hidden" name="itemId" value="<%= item._id %>">
+                                    <button type="submit" class="button is-primary">Add to Wish List</button>
+                                </form>
+                                <form method="POST" action="/fallWinter/<%= item.id %>?_method=DELETE">
+                                    <button class="button is-danger" type="submit">Delete</button>
+                                </form>
+                            </div>
                         </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
             <% } %>
         </div>
     </div>
 
     <style>
-        p, h5 {
-            color: #333; 
+        p {
+            color: orange; 
         }
     </style>
 </body>
 </html>
+
+<%- include('../partials/footer.ejs') %>

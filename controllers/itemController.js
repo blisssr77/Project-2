@@ -3,6 +3,7 @@ const FWItem = require('../models/FWItem')
 const MItem = require('../models/MItem')
 const SItem = require('../models/SItem')
 
+
 const Account = require('../models/User')
 const mongoose = require('mongoose')
 
@@ -16,25 +17,31 @@ const newForm = (req, res)=>{
     }
 }
 
-// CREATE / POST
+// NEW PAGE CREATE / POST TO SPECIAL SCENT PAGE
 const create = async(req, res)=>{
     try{
         const newItem = await SItem.create(req.body)
         console.log(newItem)
-        res.redirect('/BRiiZE')
+        res.redirect('/BRiiZE/special')
     }catch(err){
         console.log(err)
     }
 }
 
-// POST to myCart
+const categoryModel = {
+    'SS': SSItem,
+    'FW': FWItem,
+    'M': MItem,
+    'S': SItem,
+}
+
+// POST to WISH LIST
 const addToWishList = async (req, res) => {
     try{
-        const item = req.body.item;
-        res.render('wishList', {
-            item: item,
-            currentUser: req.session.currentUser,
-        })
+        const {itemId, category} = req.body;
+        const Model = categoryModel[category]
+        const item = await Model.findById(itemId)
+        res.render('')
     }catch(err){
         console.log(err)
     }
@@ -52,7 +59,7 @@ const home = async(req,res) =>{
 // WISH LIST PAGE
 const wishList = async(req, res) =>{
     try{
-        res.render('wishList.ejs', {wishList, currentUser: req.session.currentUser})
+        res.render('wishList.ejs', {categoryModel, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
@@ -551,7 +558,7 @@ const menCologneSeed = async (req, res)=>{
 const specialPage = async(req, res)=>{
     try{
         const specialScent = await SItem.find();
-        res.render("categories/special.ejs", {
+        res.render("categories/specialScent.ejs", {
             specialScent, 
             tabTitle: 'Special Scent Index',
             currentUser: req.session.currentUser})
@@ -648,17 +655,6 @@ const accountEdit = async(req, res)=>{
         console.log(err)
     }
 }
-
-// // OBJECT DELETE FUNCTION
-// async function deleteItem(req,res){
-//     try{
-//         console.log('you are inside the delete route');
-//         const result = await deleteItem(req.params.id);
-        
-//     }catch(err){
-//         console.log(err)
-//     }
-// }
 
 // SPRING SUMMER OBJECT DELETE FUNCTION
 const SSDestroy = async (req, res) => {
