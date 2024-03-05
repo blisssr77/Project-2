@@ -32,14 +32,13 @@ router.get('/special/:id', itemCtrl.SShow);
 // Account WishList Edit Delete routes
 router.get('/wishList', itemCtrl.wishList);
 router.get('/account', itemCtrl.accountPage);
-router.get('/account/edit', itemCtrl.accountEdit)
 router.get('/account/:id/edit', itemCtrl.accountEdit);
 router.delete('/springSummer/:id', itemCtrl.SSDestroy);
 router.delete('/fallWinter/:id', itemCtrl.FWDestroy);
 router.delete('/menCologne/:id', itemCtrl.MDestroy);
 router.delete('/special/:id', itemCtrl.SDestroy);
 router.get('/special/:id/edit', itemCtrl.edit)
-router.put('/BRiiZE/special/:id', itemCtrl.update)
+router.put('/special/:id', itemCtrl.update)
 router.post('/wishList', itemCtrl.addToWishList)
 
 router.post('/logout', itemCtrl.logout)

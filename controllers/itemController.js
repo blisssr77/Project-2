@@ -68,7 +68,8 @@ const wishList = async(req, res) =>{
 // ACCOUNT DETAIL PAGE
 const accountPage = async(req, res)=>{
     try{
-        res.render('account.ejs', {accountPage, currentUser: req.session.currentUser})
+        const account = await Account.findById()
+        res.render('account.ejs', {account: account, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
@@ -739,7 +740,7 @@ const update = async(req, res)=>{
         console.log(req.body)
         const index = req.params.id
         const item = await SItem.findByIdAndUpdate(index, req.body, {new: true})
-        console.log(`Received ${req.method} request for ${req.path}`);
+        // console.log(`Received ${req.method} request for ${req.path}`);
         res.redirect('/BRiiZE/special')
     }catch(err){
         console.log(err)

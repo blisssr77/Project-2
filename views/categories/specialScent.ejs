@@ -31,10 +31,10 @@
                                 <p>Size: <%= item.size %></p>
                                 <p>Price: $<%= item.price %></p>
                                 <a href="<%= item.link %>" class="button is-link">Visit Website</a>
-                                <form action="/wishList" method="post">
+                                <!-- <form action="/wishList" method="post">
                                     <input type="hidden" name="itemId" value="<%= item._id %>">
                                     <button type="submit" class="button is-primary">Add to Wish List</button>
-                                </form>
+                                </form> -->
                                 <form method="POST" action="/special/<%= item.id %>?_method=DELETE">
                                     <button class="button is-danger" type="submit">Delete</button>
                                 </form>
@@ -53,9 +53,16 @@
     </div>
 
     <style>
-        p {
-            color: orange; 
-        }
+    body{
+    }
+    p {
+        color: rgb(249, 171, 27); 
+    }
+    .content{
+        font-family: "Raleway", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+    }
     </style>
 </body>
 </html>

@@ -12,7 +12,7 @@
     <%- include ('./partials/header.ejs') %>
 
     <h1>Edit Item</h1>
-    <form action="/BRiiZE/special/<%= item.id %>_?method=PUT" method="POST">
+    <form action="/special/<%= item.id %>?_method=PUT" method="POST">
         <input type="hidden" name="_method" value="PUT">
         <div>
             <label for="name">Name:</label>

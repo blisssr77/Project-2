@@ -15,7 +15,7 @@
                     <p><strong>Username:</strong> <%= currentUser.username %></p>
                     <p><strong>Email:</strong> <%= currentUser.email %></p>
                     
-                    <a href="/account/<% account.id %>/edit" class="button button-primary">Edit Account</a>
+                    <!-- <a href="/account/<% currentUser.id %>/edit" class="button button-primary">Edit Account</a> -->
                     <form action="/logout" method="POST" style="margin-top: 10px;">
                         <button type="submit" class="button button-primary">Log Out</button>
                     </form>
@@ -24,3 +24,8 @@
         </div>
     </body>
 </html>
+<style>
+    body{
+        margin-top: 5%;
+    }
+</style>
