@@ -27,9 +27,11 @@
                             </div>
     
                             <div class="content">
-                                <p>Description: <%= item.description %></p>
+                                <!-- <p>Description: <%= item.description %></p> -->
+                                <br><br><br><br><br><br><br><br><br><br><br><br>
                                 <p>Size: <%= item.size %></p>
                                 <p>Price: $<%= item.price %></p>
+                                <a href="/springSummer/<%= item.id %>" class="button is-primary">View Detail</a>
                                 <a href="<%= item.link %>" class="button is-link">Visit Website</a>
                                 <!-- <form action="/wishList" method="post">
                                     <input type="hidden" name="itemId" value="<%= item._id %>">
@@ -57,7 +59,7 @@
         background-size: 100%;
     }
     p {
-        color: rgb(249, 171, 27); 
+        color: rgb(0, 0, 0); 
     }
     .content{
         font-family: "Raleway", sans-serif;
