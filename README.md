@@ -39,5 +39,5 @@ If you have any suggestions or need a bug fix that would improve the application
 
 ## Contact
 - Email✅: Robin Chae, robinchae55@gmail.com
-- LinkedIn✅: [linkedin.com/in/robinchae](www.linkedin.com/in/robinchae)
+- LinkedIn✅: www.linkedin.com/in/robinchae
 - Project Link✅: [github.com/blisssr77/Project-2.git](https://github.com/blisssr77/Project-2.git)
