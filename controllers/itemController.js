@@ -705,18 +705,18 @@ const logout = async (req, res) => {
         await new Promise((resolve, reject) => {
             req.session.destroy((err) => {
                 if (err) {
-                    reject(err); // Reject the promise if there's an error
+                    reject(err); 
                 } else {
-                    resolve(); // Resolve the promise otherwise
+                    resolve(); 
                 }
             });
         });
         
         res.clearCookie('connect.sid'); // Clear the session cookie
-        res.redirect('/'); // Redirect user to home page or login page
+        res.redirect('/');
     } catch (err) {
-        console.log(err); // Log the error
-        res.redirect('/'); // Redirect to a safe page in case of error
+        console.log(err); 
+        res.redirect('/'); 
     }
 };
 
@@ -744,6 +744,7 @@ const update = async(req, res)=>{
         res.redirect('/BRiiZE/special')
     }catch(err){
         console.log(err)
+        // got source from Google for debugging tip
         res.status(500).send("Error updating item: " + err.message)
     }
 }
