@@ -10,6 +10,9 @@
 
 
 ## Screenshots
+![Screenshot 2024-03-05 at 10 03 53 PM](https://github.com/blisssr77/Project-2/assets/150565578/906c5988-2f7a-4a45-a200-302cd8a39f31)
+![Screenshot 2024-03-05 at 10 04 07 PM](https://github.com/blisssr77/Project-2/assets/150565578/2b588dbb-10be-4b60-89af-2bcf19b75a91)
+![Screenshot 2024-03-05 at 10 04 19 PM](https://github.com/blisssr77/Project-2/assets/150565578/f272c256-7653-42c9-aaaf-bc7e89d52906)
 
 ## Technologies Used
 - JavaScript
@@ -36,5 +39,5 @@ If you have any suggestions or need a bug fix that would improve the application
 
 ## Contact
 - Email✅: Robin Chae, robinchae55@gmail.com
-- LinkedIn✅: [linkedin.com/in/robinchae](www.linkedin.com/in/robinchae)
+- LinkedIn✅: www.linkedin.com/in/robinchae
 - Project Link✅: [github.com/blisssr77/Project-2.git](https://github.com/blisssr77/Project-2.git)
