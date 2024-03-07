@@ -1,12 +1,24 @@
-const sniper = [
-    {
-        name: '',
-        manufacturer: '',
-        price: ,
-        catridge: '',
-        action: '',
-        origin: '',
-        year: ,
-        image: '',
-    },
-]
+// SPECIAL SCENT OBJECT DELETE FUNCTION
+const SDestroy = async (req, res) => {
+    try{
+        console.log("inside the delete route")
+        await SItem.findByIdAndDelete(req.params.id)
+        res.redirect('/BRiiZE/special')
+    }catch(err){
+        console.log(err)
+    }
+}
+
+// SPECIAL SCENT EDIT - "/id/edit"
+const editForm = async(req,res)=>{
+    try{
+        const item = await SItem.findById(req.params.id)
+        res.render('SItemEdit.ejs', {
+            item,
+            tabTitle:'Special Scent',
+            currentUser: req.session.currentUser
+        })
+    }catch(err){
+        console.log(err)
+    }
+}

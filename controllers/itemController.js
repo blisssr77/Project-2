@@ -21,27 +21,11 @@ const newForm = (req, res)=>{
 const create = async(req, res)=>{
     try{
         const newItem = await SItem.create(req.body)
-        console.log(newItem)
+        if(req.session && req.session.userId) {
+            const account = await Account.findById(req.session.userId);
+            console.log(account);
+        }
         res.redirect('/BRiiZE/special')
-    }catch(err){
-        console.log(err)
-    }
-}
-
-const categoryModel = {
-    'SS': SSItem,
-    'FW': FWItem,
-    'M': MItem,
-    'S': SItem,
-}
-
-// POST to WISH LIST
-const addToWishList = async (req, res) => {
-    try{
-        const {itemId, category} = req.body;
-        const Model = categoryModel[category]
-        const item = await Model.findById(itemId)
-        res.render('')
     }catch(err){
         console.log(err)
     }
@@ -51,15 +35,6 @@ const addToWishList = async (req, res) => {
 const home = async(req,res) =>{
     try{
         res.render('home.ejs', {currentUser: req.session.currentUser})
-    }catch(err){
-        console.log(err)
-    }
-}
-
-// WISH LIST PAGE
-const wishList = async(req, res) =>{
-    try{
-        res.render('wishList.ejs', {categoryModel, currentUser: req.session.currentUser})
     }catch(err){
         console.log(err)
     }
@@ -646,17 +621,6 @@ const MShow = async (req, res) =>{
 }
 
 
-// Edit Account
-const accountEdit = async(req, res)=>{
-    try{
-        const index = req.params.id
-        const account = await Account.findById(index)
-        res.render('edit.ejs', {accounts: account, tabTitle: 'Edit'})
-    }catch(err){
-        console.log(err)
-    }
-}
-
 // SPRING SUMMER OBJECT DELETE FUNCTION
 const SSDestroy = async (req, res) => {
     try{
@@ -724,11 +688,16 @@ const logout = async (req, res) => {
 const editForm = async(req,res)=>{
     try{
         const item = await SItem.findById(req.params.id)
-        res.render('SItemEdit.ejs', {
-            item,
-            tabTitle:'Special Scent',
-            currentUser: req.session.currentUser
-        })
+        if (item.creatorId === req.session.currentUser._id) {
+            res.render('SItemEdit.ejs', {
+                item,
+                tabTitle:'Special Scent',
+                currentUser: req.session.currentUser
+            })
+        } else {
+            res.status(403).send('Unauthorized: You cannot edit this item.');
+        }
+        
     }catch(err){
         console.log(err)
     }
@@ -740,7 +709,6 @@ const update = async(req, res)=>{
         console.log(req.body)
         const index = req.params.id
         const item = await SItem.findByIdAndUpdate(index, req.body, {new: true})
-        // console.log(`Received ${req.method} request for ${req.path}`);
         res.redirect('/BRiiZE/special')
     }catch(err){
         console.log(err)
@@ -752,7 +720,6 @@ const update = async(req, res)=>{
 module.exports = {
     home,
     new: newForm,
-    wishList,
     springSummerPage,
     fallWinterPage,
     menColognePage,
@@ -760,11 +727,9 @@ module.exports = {
     FWShow,
     SShow,
     MShow,
-    addToWishList,
     specialPage,
     create,
     accountPage,
-    accountEdit,
     springSummerSeed,
     fallWinterSeed,
     menCologneSeed,

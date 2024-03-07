@@ -9,13 +9,13 @@
         <%- include ('./partials/header.ejs') %>
     
         <div class="container">
+            <!--I learned how to make the columns through Skeleton website-->
             <div class="eight columns">
                 <div class="card" style="padding: 20px; background: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                     <h4>Account Details</h4>
                     <p><strong>Username:</strong> <%= currentUser.username %></p>
                     <p><strong>Email:</strong> <%= currentUser.email %></p>
                     
-                    <!-- <a href="/account/<% currentUser.id %>/edit" class="button button-primary">Edit Account</a> -->
                     <form action="/logout" method="POST" style="margin-top: 10px;">
                         <button type="submit" class="button button-primary">Log Out</button>
                     </form>

@@ -10,7 +10,6 @@ router.use(isAuthenticated);
 router.get('/BRiiZE', itemCtrl.home);
 router.get('/new', itemCtrl.new);
 router.post('/BRiiZE/special', itemCtrl.create);
-router.post('/wishList', itemCtrl.addToWishList);
 
 // Index and seed routes
 router.get('/BRiiZE/springSummer', itemCtrl.springSummerPage);
@@ -30,16 +29,13 @@ router.get('/menCologne/:id', itemCtrl.MShow);
 router.get('/special/:id', itemCtrl.SShow);
 
 // Account WishList Edit Delete routes
-router.get('/wishList', itemCtrl.wishList);
 router.get('/account', itemCtrl.accountPage);
-router.get('/account/:id/edit', itemCtrl.accountEdit);
 router.delete('/springSummer/:id', itemCtrl.SSDestroy);
 router.delete('/fallWinter/:id', itemCtrl.FWDestroy);
 router.delete('/menCologne/:id', itemCtrl.MDestroy);
 router.delete('/special/:id', itemCtrl.SDestroy);
 router.get('/special/:id/edit', itemCtrl.edit)
 router.put('/special/:id', itemCtrl.update)
-router.post('/wishList', itemCtrl.addToWishList)
 
 router.post('/logout', itemCtrl.logout)
 

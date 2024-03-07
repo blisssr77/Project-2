@@ -7,7 +7,9 @@ const SSchema = new mongoose.Schema({
     size: {type: String, required: true},
     price: {type: Number, required: true},
     link: {type: String},
-    image: {type: String}
+    image: {type: String},
+    creatorId: {type: String, required:true}
+    
 }, {timestamps: true})
 
 const SItem = mongoose.model('Special Item', SSchema)
