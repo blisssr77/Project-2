@@ -654,9 +654,15 @@ const MDestroy = async (req, res) => {
 // SPECIAL SCENT OBJECT DELETE FUNCTION
 const SDestroy = async (req, res) => {
     try{
+        const item = await SItem.findById(req.params.id)
         console.log("inside the delete route")
-        await SItem.findByIdAndDelete(req.params.id)
-        res.redirect('/BRiiZE/special')
+        if(item.creatorId === req.session.currentUser.username) {
+            await SItem.findByIdAndDelete(req.params.id)
+            res.redirect('/BRiiZE/special')
+        } else {
+            res.status(404).send('Unauthorized: You cannot delete this item.')
+        }
+        
     }catch(err){
         console.log(err)
     }
@@ -688,7 +694,7 @@ const logout = async (req, res) => {
 const editForm = async(req,res)=>{
     try{
         const item = await SItem.findById(req.params.id)
-        if (item.creatorId === req.session.currentUser._id) {
+        if (item.creatorId === req.session.currentUser.username) {
             res.render('SItemEdit.ejs', {
                 item,
                 tabTitle:'Special Scent',

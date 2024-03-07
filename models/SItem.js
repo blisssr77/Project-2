@@ -9,7 +9,6 @@ const SSchema = new mongoose.Schema({
     link: {type: String},
     image: {type: String},
     creatorId: {type: String, required:true}
-    
 }, {timestamps: true})
 
 const SItem = mongoose.model('Special Item', SSchema)
