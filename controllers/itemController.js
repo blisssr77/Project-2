@@ -660,6 +660,7 @@ const SDestroy = async (req, res) => {
             await SItem.findByIdAndDelete(req.params.id)
             res.redirect('/BRiiZE/special')
         } else {
+            // I learned below status sender in Google
             res.status(404).send('Unauthorized: You cannot delete this item.')
         }
         
