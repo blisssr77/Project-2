@@ -30,9 +30,6 @@ router.get('/special/:id', itemCtrl.SShow);
 
 // Account WishList Edit Delete routes
 router.get('/account', itemCtrl.accountPage);
-router.delete('/springSummer/:id', itemCtrl.SSDestroy);
-router.delete('/fallWinter/:id', itemCtrl.FWDestroy);
-router.delete('/menCologne/:id', itemCtrl.MDestroy);
 router.delete('/special/:id', itemCtrl.SDestroy);
 router.get('/special/:id/edit', itemCtrl.edit)
 router.put('/special/:id', itemCtrl.update)

@@ -18,16 +18,19 @@ const newForm = (req, res)=>{
 }
 
 // NEW PAGE CREATE / POST TO SPECIAL SCENT PAGE
-const create = async(req, res)=>{
-    try{
-        const newItem = await SItem.create(req.body)
-        if(req.session && req.session.userId) {
-            const account = await Account.findById(req.session.userId);
+const create = async(req, res) => {
+    try {
+        if(req.session && req.session.currentUser) {
+            const newItem = await SItem.create({
+                ...req.body,
+                creatorId: req.session.currentUser
+            });
+            const account = await Account.findById(req.session.currentUser);
             console.log(account);
-        }
-        res.redirect('/BRiiZE/special')
-    }catch(err){
-        console.log(err)
+            res.redirect('/BRiiZE/special');
+        } 
+    } catch(err) {
+        console.log(err);
     }
 }
 
@@ -621,42 +624,12 @@ const MShow = async (req, res) =>{
 }
 
 
-// SPRING SUMMER OBJECT DELETE FUNCTION
-const SSDestroy = async (req, res) => {
-    try{
-        console.log("inside the delete route")
-        await SSItem.findByIdAndDelete(req.params.id)
-        res.redirect('/BRiiZE/springSummer')
-    }catch(err){
-        console.log(err)
-    }
-}
-// FALL WINTER OBJECT DELETE FUNCTION
-const FWDestroy = async (req, res) => {
-    try{
-        console.log("inside the delete route")
-        await FWItem.findByIdAndDelete(req.params.id)
-        res.redirect('/BRiiZE/fallWinter')
-    }catch(err){
-        console.log(err)
-    }
-}
-// MEN COLOGNE OBJECT DELETE FUNCTION
-const MDestroy = async (req, res) => {
-    try{
-        console.log("inside the delete route")
-        await MItem.findByIdAndDelete(req.params.id)
-        res.redirect('/BRiiZE/menCologne')
-    }catch(err){
-        console.log(err)
-    }
-}
 // SPECIAL SCENT OBJECT DELETE FUNCTION
 const SDestroy = async (req, res) => {
     try{
         const item = await SItem.findById(req.params.id)
         console.log("inside the delete route")
-        if(item.creatorId === req.session.currentUser.username) {
+        if(item.creatorId && item.creatorId.equals(req.session.currentUser._id)) {
             await SItem.findByIdAndDelete(req.params.id)
             res.redirect('/BRiiZE/special')
         } else {
@@ -694,8 +667,11 @@ const logout = async (req, res) => {
 // SPECIAL SCENT EDIT - "/id/edit"
 const editForm = async(req,res)=>{
     try{
-        const item = await SItem.findById(req.params.id)
-        if (item.creatorId === req.session.currentUser.username) {
+        const item = await SItem.findById(req.params.id);
+        console.log('item.creatorId:', item.creatorId);
+        console.log('session currentUser _id:', req.session.currentUser._id);
+
+        if (item.creatorId && item.creatorId.equals(req.session.currentUser._id)) {
             res.render('SItemEdit.ejs', {
                 item,
                 tabTitle:'Special Scent',
@@ -740,9 +716,6 @@ module.exports = {
     springSummerSeed,
     fallWinterSeed,
     menCologneSeed,
-    SSDestroy,
-    FWDestroy,
-    MDestroy,
     SDestroy,
     logout,
     edit: editForm,
